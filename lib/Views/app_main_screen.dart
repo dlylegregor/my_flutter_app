@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import "package:iconsax/iconsax.dart";
 import "package:my_flutter_app/Utils/constants.dart";
+import "package:my_flutter_app/Views/my_app_home_screen.dart";
 
 class AppMainScreen extends StatefulWidget {
   const AppMainScreen({super.key});
@@ -11,6 +12,18 @@ class AppMainScreen extends StatefulWidget {
 
 class _AppMainScreenState extends State<AppMainScreen> {
   int selectedIndex = 0;
+  late final List<Widget> page;
+  @override
+  void initState() {
+    page = [
+      const MyAppHomeScreen(),
+      navBarPage(Iconsax.heart5),
+      navBarPage(Iconsax.calendar5),
+      navBarPage(Iconsax.setting_21),
+    ];
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,6 +72,11 @@ class _AppMainScreenState extends State<AppMainScreen> {
           ),
         ],
       ),
+      body: page[selectedIndex],
     );
+  }
+
+  navBarPage(iconName) {
+    return Center(child: Icon(iconName, size: 100, color: kprimaryColor));
   }
 }
